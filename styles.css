@@ -1,0 +1,206 @@
+/* Engineering Portfolio — Lukas Gerster */
+
+:root {
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Söhne Mono", ui-monospace, monospace;
+  --border-radius-sm: 6px;
+  --border-radius-lg: 12px;
+
+  /* Palette */
+  --cream: #F4F1EA;
+  --cream-2: #EBE6DB;
+  --ink: #1C1B17;
+  --ink-2: #2A2925;
+
+  --aero: #E8D5C0;
+  --aero-ink: #6B3416;
+  --aero-deep: #3A1C0A;
+  --aero-accent: #A8642C;
+
+  --robo: #C8DDD2;
+  --robo-ink: #08423A;
+  --robo-deep: #042820;
+
+  --soft: #C9D8E8;
+  --soft-ink: #0A3563;
+  --soft-deep: #042040;
+
+  --rule: rgba(28,27,23,0.15);
+  --muted: rgba(28,27,23,0.55);
+  --muted-2: rgba(28,27,23,0.4);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #E8E3D8;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button { font-family: inherit; }
+
+a { color: inherit; text-decoration: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* App stage — sits the "frame" centered with breathing room */
+.stage {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+}
+.frame {
+  width: 100%;
+  max-width: 1180px;
+  background: var(--cream);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 60px -28px rgba(28,27,23,0.25), 0 1px 0 rgba(28,27,23,0.04);
+}
+
+/* Page transitions */
+.page {
+  animation: pageIn 360ms cubic-bezier(.2,.6,.2,1);
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 40px;
+  animation: marquee 38s linear infinite;
+  white-space: nowrap;
+}
+
+/* Hover lift for category doors */
+.door {
+  transition: transform 220ms cubic-bezier(.2,.6,.2,1), box-shadow 220ms ease;
+  will-change: transform;
+}
+.door:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -22px rgba(28,27,23,0.35);
+}
+.door:hover .door-arrow { transform: translateX(4px); }
+.door-arrow { transition: transform 220ms ease; display: inline-block; }
+
+/* Nav link */
+.nav-link {
+  cursor: pointer;
+  position: relative;
+  padding: 4px 0;
+  transition: color 180ms ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms cubic-bezier(.2,.6,.2,1);
+}
+.nav-link:hover::after,
+.nav-link.is-active::after { transform: scaleX(1); }
+.nav-link.is-active { color: var(--ink); }
+
+/* Project rows */
+.proj-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 1.4fr 140px;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 0;
+  border-top: 0.5px solid var(--rule);
+  cursor: pointer;
+  transition: background 200ms ease, padding 200ms ease;
+}
+.proj-row:hover { background: rgba(255,255,255,0.5); padding-left: 8px; padding-right: 8px; }
+.proj-row:last-child { border-bottom: 0.5px solid var(--rule); }
+.proj-row .proj-arrow { transition: transform 220ms ease; }
+.proj-row:hover .proj-arrow { transform: translateX(6px); }
+
+/* Iteration slider dots */
+.ver-tab { cursor: pointer; outline: none; }
+.ver-tab:focus-visible .ver-dot { box-shadow: 0 0 0 3px rgba(8,66,58,0.2); }
+
+/* Subtle ticker pulse */
+.pulse {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: #08423A; margin-right: 8px;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* SVG placeholder (image slot) — diagonal stripes */
+.placeholder-stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(28,27,23,0.05) 0px,
+    rgba(28,27,23,0.05) 1px,
+    transparent 1px,
+    transparent 9px
+  );
+}
+
+/* Spec grid */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+}
+.spec-grid > div {
+  padding: 16px 18px;
+  border-right: 0.5px solid var(--rule);
+}
+.spec-grid > div:last-child { border-right: 0; }
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--muted-2);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.spec-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+/* Misc utilities */
+.serif { font-family: var(--font-serif); font-weight: 400; }
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.italic { font-style: italic; }

@@ -52,10 +52,12 @@ function ContactPage({ onNav }) {
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 padding: "14px 18px", border: "0.5px solid rgba(244,241,234,0.18)", borderRadius: 8,
                 color: "inherit", textDecoration: "none",
-                transition: "background 180ms ease, border-color 180ms ease",
+                transition: "background 200ms cubic-bezier(0.23, 1, 0.32, 1), border-color 200ms cubic-bezier(0.23, 1, 0.32, 1), transform 100ms cubic-bezier(0.23, 1, 0.32, 1)",
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = "rgba(244,241,234,0.04)"; e.currentTarget.style.borderColor = "rgba(244,241,234,0.32)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(244,241,234,0.18)"; }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(244,241,234,0.06)"; e.currentTarget.style.borderColor = "rgba(244,241,234,0.35)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(244,241,234,0.18)"; e.currentTarget.style.transform = "none"; }}
+              onMouseDown={e => { e.currentTarget.style.transform = "scale(0.985)"; }}
+              onMouseUp={e => { e.currentTarget.style.transform = "none"; }}
               >
                 <div className="mono" style={{ fontSize: 10, color: "rgba(244,241,234,0.55)", letterSpacing: "0.14em" }}>{c.label}</div>
                 <div className="mono" style={{ fontSize: 13, color: "var(--cream)", display: "flex", alignItems: "center", gap: 10 }}>

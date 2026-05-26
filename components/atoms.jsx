@@ -56,11 +56,20 @@ function NavBar({ current, onNav, accent = "var(--ink)" }) {
     <div style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "18px 28px", borderBottom: "0.5px solid rgba(28,27,23,0.15)",
+      position: "sticky", top: 0, zIndex: 100,
+      background: "rgba(244,241,234,0.88)",
+      backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)",
     }}>
       <div
         className="serif"
         onClick={() => onNav("index")}
-        style={{ fontSize: 20, fontStyle: "italic", letterSpacing: "-0.01em", color: "var(--ink)", cursor: "pointer" }}
+        style={{
+          fontSize: 20, fontStyle: "italic", letterSpacing: "-0.01em", color: "var(--ink)", cursor: "pointer",
+          transition: "opacity 200ms cubic-bezier(0.23, 1, 0.32, 1)",
+        }}
+        onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
+        onMouseLeave={e => e.currentTarget.style.opacity = "1"}
       >
         Lukas Gerster
       </div>

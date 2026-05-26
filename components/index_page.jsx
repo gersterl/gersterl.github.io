@@ -330,7 +330,12 @@ function IndexPage({ onNav }) {
             </div>
           </div>
           <div className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", color: "rgba(28,27,23,0.7)", display: "flex", alignItems: "center", gap: 8 }}>
-            READ <span className="door-arrow" style={{ fontSize: 14 }}>→</span>
+            READ
+            <span className="door-arrow" style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              width: 26, height: 26, borderRadius: "50%",
+              background: "rgba(28,27,23,0.06)", fontSize: 14,
+            }}>→</span>
           </div>
         </a>
       </div>
@@ -343,35 +348,48 @@ function IndexPage({ onNav }) {
         <div className="mono" style={{ fontSize: 10, color: "rgba(28,27,23,0.5)", letterSpacing: "0.12em" }}>3 PATHS</div>
       </div>
 
-      {/* CATEGORY DOORS */}
+      {/* CATEGORY DOORS — asymmetric bento: feature card left, stacked pair right */}
       <div style={{
         padding: "0 28px 36px",
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14,
+        display: "grid",
+        gridTemplateColumns: "1.55fr 1fr",
+        gridTemplateRows: "auto auto",
+        gap: 14,
       }}>
-        {categories.map(c => (
+        {categories.map((c, i) => (
           <a
             key={c.id}
-            className="door"
+            className="door stagger-item"
             onClick={() => onNav(c.id)}
             style={{
               background: c.bg, borderRadius: "var(--border-radius-lg)",
-              padding: "22px 22px", minHeight: 320,
+              padding: "22px 22px", minHeight: i === 0 ? 500 : 200,
               display: "flex", flexDirection: "column", justifyContent: "space-between",
               position: "relative", overflow: "hidden", cursor: "pointer",
               border: `0.5px solid ${c.ink === "var(--aero-ink)" ? "rgba(168,100,44,0.25)" : c.ink === "var(--robo-ink)" ? "rgba(15,110,86,0.25)" : "rgba(24,95,165,0.25)"}`,
               color: "inherit",
+              gridColumn: i === 0 ? "1" : "2",
+              gridRow: i === 0 ? "1 / span 2" : i === 1 ? "1" : "2",
+              boxShadow: i === 0
+                ? "0 8px 28px -12px rgba(168,100,44,0.18)"
+                : i === 1
+                ? "0 8px 28px -12px rgba(8,66,58,0.18)"
+                : "0 8px 28px -12px rgba(10,53,99,0.18)",
+              "--stagger-delay": `${i * 90}ms`,
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
               <span className="mono" style={{ fontSize: 10, color: c.ink, letterSpacing: "0.14em" }}>— {c.n}</span>
             </div>
 
-            {/* Thumbnail — real render where we have it, image-slot where the user can drop a photo */}
+            {/* Thumbnail */}
             <div style={{
               borderRadius: 8, overflow: "hidden",
               background: "rgba(255,255,255,0.4)",
               border: c.ink === "var(--aero-ink)" ? "0.5px solid rgba(168,100,44,0.2)" : c.ink === "var(--robo-ink)" ? "0.5px solid rgba(15,110,86,0.2)" : "0.5px solid rgba(24,95,165,0.2)",
-              aspectRatio: "4 / 3", marginBottom: 16, position: "relative",
+              ...(i === 0 ? { aspectRatio: "16 / 9" } : { height: 100 }),
+              marginBottom: 14, position: "relative",
+              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.5)",
             }}>
               {c.thumb.kind === "image" ? (
                 <img
@@ -392,12 +410,17 @@ function IndexPage({ onNav }) {
             </div>
 
             <div>
-              <h3 className="serif" style={{ fontSize: 30, margin: "0 0 6px", color: c.deep, letterSpacing: "-0.015em", lineHeight: 0.98 }}>
+              <h3 className="serif" style={{ fontSize: i === 0 ? 38 : 24, margin: "0 0 6px", color: c.deep, letterSpacing: "-0.02em", lineHeight: 0.96 }}>
                 {c.title}
               </h3>
-              <p style={{ fontSize: 12.5, color: c.ink, margin: "0 0 14px", lineHeight: 1.45 }}>{c.sub}</p>
+              <p style={{ fontSize: i === 0 ? 13 : 12, color: c.ink, margin: "0 0 14px", lineHeight: 1.5 }}>{c.sub}</p>
               <div className="mono" style={{ fontSize: 10, letterSpacing: "0.14em", color: c.deep, display: "flex", alignItems: "center", gap: 8 }}>
-                ENTER <span className="door-arrow" style={{ fontSize: 13 }}>→</span>
+                ENTER
+                <span className="door-arrow" style={{
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  width: 22, height: 22, borderRadius: "50%",
+                  background: "rgba(0,0,0,0.06)", fontSize: 13,
+                }}>→</span>
               </div>
             </div>
           </a>

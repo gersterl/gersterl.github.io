@@ -50,11 +50,11 @@ function NavBar({ current, onNav }) {
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
       display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "18px 40px",
-      background: "rgba(13,13,11,0.92)",
+      padding: "18px 44px",
+      background: "rgba(4,8,16,0.88)",
       backdropFilter: "blur(20px)",
       WebkitBackdropFilter: "blur(20px)",
-      borderBottom: "0.5px solid rgba(237,232,222,0.07)",
+      borderBottom: "0.5px solid rgba(0,212,255,0.12)",
     }}>
       <div
         onClick={() => onNav("index")}
@@ -62,10 +62,10 @@ function NavBar({ current, onNav }) {
           fontFamily: "var(--font-mono)", fontSize: 11,
           letterSpacing: "0.18em", textTransform: "uppercase",
           color: "var(--text)", cursor: "pointer",
-          transition: "opacity 180ms",
+          transition: "color 180ms, text-shadow 180ms",
         }}
-        onMouseEnter={e => { e.currentTarget.style.opacity = "0.6"; }}
-        onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
+        onMouseEnter={e => { e.currentTarget.style.color = "var(--cyan)"; e.currentTarget.style.textShadow = "0 0 16px rgba(0,212,255,0.5)"; }}
+        onMouseLeave={e => { e.currentTarget.style.color = "var(--text)"; e.currentTarget.style.textShadow = "none"; }}
       >
         Lukas Gerster
       </div>

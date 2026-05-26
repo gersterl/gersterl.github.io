@@ -1,9 +1,10 @@
-/* global React, ReactDOM, NavBar, IndexPage, AerospacePage, RoboticsPage, SoftwarePage, CVPage, ContactPage */
+/* global React, ReactDOM, NavBar, IntroOverlay, IndexPage, AerospacePage, RoboticsPage, SoftwarePage, CVPage, ContactPage */
 
 const { useState } = React;
 
 function App() {
   const [page, setPage] = useState("index");
+  const [showIntro, setShowIntro] = useState(!sessionStorage.getItem("intro-done"));
 
   const nav = (p) => {
     setPage(p);
@@ -26,6 +27,14 @@ function App() {
     <div className="page-root">
       <NavBar current={page} onNav={nav} />
       {body}
+      {showIntro && (
+        <IntroOverlay
+          onComplete={() => {
+            sessionStorage.setItem("intro-done", "1");
+            setShowIntro(false);
+          }}
+        />
+      )}
     </div>
   );
 }

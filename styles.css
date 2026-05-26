@@ -266,6 +266,20 @@ body::after {
 }
 .text-glow { text-shadow: 0 0 32px rgba(0,212,255,0.55); }
 
+/* ─── Intro overlay ─────────────────────────────────────────── */
+@keyframes introCW  { from { transform: rotate(0deg);    } to { transform: rotate(360deg);  } }
+@keyframes introCCW { from { transform: rotate(0deg);    } to { transform: rotate(-360deg); } }
+@keyframes introBarLoad { from { width: 0; } to { width: 100%; } }
+
+.intro-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--cyan);
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(0,212,255,0.75);
+  animation: introBarLoad 500ms ease-out both;
+}
+
 /* ─── Reduced motion ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .stagger-item, .page { animation: none; }

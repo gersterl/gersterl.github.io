@@ -84,7 +84,7 @@ function NavBar({ current, onNav, accent = "var(--ink)" }) {
           </span>
         ))}
       </div>
-      <div className="mono" style={{ fontSize: 11, color: "rgba(28,27,23,0.45)" }}>47.5°N / 8.7°E</div>
+      <div className="mono" style={{ fontSize: 11, color: "rgba(28,27,23,0.45)", letterSpacing: "0.08em" }}>ETH ZÜRICH</div>
     </div>
   );
 }

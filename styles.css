@@ -2,7 +2,7 @@
 
 :root {
   --font-sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-mono: "JetBrains Mono", "Söhne Mono", ui-monospace, monospace;
   --border-radius-sm: 6px;
   --border-radius-lg: 12px;

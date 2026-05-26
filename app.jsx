@@ -5,7 +5,7 @@ const { useState, useEffect } = React;
 // Tweakable defaults — host rewrites this block in place when user changes values.
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#A8642C",
-  "serif": "Instrument Serif",
+  "serif": "Cormorant Garamond",
   "background": "#E8E3D8",
   "showMarquee": true
 }/*EDITMODE-END*/;

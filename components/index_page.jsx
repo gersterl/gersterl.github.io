@@ -208,17 +208,18 @@ function IndexPage({ onNav }) {
       deep: "var(--robo-deep)",
       iconColor: "var(--robo-ink)",
       icon: "robot",
-      thumb: { kind: "motif", which: "cycloid" },
+      thumb: { kind: "image", src: "assets/arm-v1.png", objectPosition: "center top" },
     },
     {
       id: "software",
       n: "03",
       title: "Software",
-      sub: "Live arm tracking → the robot mirrors me.",
-      bg: "var(--soft)",
-      ink: "var(--soft-ink)",
-      deep: "var(--soft-deep)",
-      iconColor: "var(--soft-ink)",
+      sub: "Live arm tracking. The robot mirrors me.",
+      bg: "var(--soft-deep)",
+      ink: "rgba(201,216,232,0.85)",
+      deep: "var(--soft)",
+      inverted: true,
+      iconColor: "var(--soft)",
       icon: "scan",
       thumb: { kind: "motif", which: "signals" },
     },
@@ -264,13 +265,6 @@ function IndexPage({ onNav }) {
           background: "var(--cream)", pointerEvents: "none",
         }}/>
 
-        {/* Eyebrow top-right */}
-        <div className="eyebrow" style={{
-          position: "absolute", top: 32, right: 28, zIndex: 3,
-          color: "rgba(28,27,23,0.55)",
-        }}>
-          — 001 / Index
-        </div>
 
         {/* Banner headline — sits high, extends left over the rector */}
         <div style={{
@@ -279,11 +273,12 @@ function IndexPage({ onNav }) {
           textAlign: "right",
         }}>
           <h1 className="serif" style={{
-            fontSize: 144, lineHeight: 0.88, letterSpacing: "-0.04em",
+            fontSize: 152, lineHeight: 0.86, letterSpacing: "-0.03em",
             margin: 0, color: "var(--ink)", textWrap: "balance",
+            fontWeight: 300,
           }}>
             Engineering<br />
-            <span className="italic" style={{ color: "var(--aero-accent)" }}>Portfolio.</span>
+            <span className="italic" style={{ color: "var(--aero-accent)", fontWeight: 600 }}>Portfolio.</span>
           </h1>
         </div>
 
@@ -366,30 +361,34 @@ function IndexPage({ onNav }) {
               padding: "22px 22px", minHeight: i === 0 ? 500 : 200,
               display: "flex", flexDirection: "column", justifyContent: "space-between",
               position: "relative", overflow: "hidden", cursor: "pointer",
-              border: `0.5px solid ${c.ink === "var(--aero-ink)" ? "rgba(168,100,44,0.25)" : c.ink === "var(--robo-ink)" ? "rgba(15,110,86,0.25)" : "rgba(24,95,165,0.25)"}`,
-              color: "inherit",
+              border: c.inverted
+                ? "0.5px solid rgba(201,216,232,0.12)"
+                : `0.5px solid ${i === 0 ? "rgba(168,100,44,0.25)" : "rgba(15,110,86,0.25)"}`,
+              color: c.inverted ? "var(--cream)" : "inherit",
               gridColumn: i === 0 ? "1" : "2",
               gridRow: i === 0 ? "1 / span 2" : i === 1 ? "1" : "2",
               boxShadow: i === 0
                 ? "0 8px 28px -12px rgba(168,100,44,0.18)"
                 : i === 1
-                ? "0 8px 28px -12px rgba(8,66,58,0.18)"
-                : "0 8px 28px -12px rgba(10,53,99,0.18)",
+                ? "0 8px 28px -12px rgba(8,66,58,0.22)"
+                : "0 8px 36px -12px rgba(4,32,64,0.45)",
               "--stagger-delay": `${i * 90}ms`,
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-              <span className="mono" style={{ fontSize: 10, color: c.ink, letterSpacing: "0.14em" }}>— {c.n}</span>
+              <span className="mono" style={{ fontSize: 10, color: c.ink, letterSpacing: "0.14em" }}>{c.n}</span>
             </div>
 
             {/* Thumbnail */}
             <div style={{
               borderRadius: 8, overflow: "hidden",
-              background: "rgba(255,255,255,0.4)",
-              border: c.ink === "var(--aero-ink)" ? "0.5px solid rgba(168,100,44,0.2)" : c.ink === "var(--robo-ink)" ? "0.5px solid rgba(15,110,86,0.2)" : "0.5px solid rgba(24,95,165,0.2)",
+              background: c.inverted ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.4)",
+              border: c.inverted
+                ? "0.5px solid rgba(201,216,232,0.15)"
+                : i === 0 ? "0.5px solid rgba(168,100,44,0.2)" : "0.5px solid rgba(15,110,86,0.2)",
               ...(i === 0 ? { aspectRatio: "16 / 9" } : { height: 100 }),
               marginBottom: 14, position: "relative",
-              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.5)",
+              boxShadow: c.inverted ? "none" : "inset 0 1px 2px rgba(255,255,255,0.5)",
             }}>
               {c.thumb.kind === "image" ? (
                 <img
@@ -441,7 +440,6 @@ function IndexPage({ onNav }) {
               <span>ETH ZÜRICH '27</span>
               <span>BUILT FROM CAD, COMPOSITES, AND CAFFEINE</span>
               <span>PFADI BUBENBERG / CHAPPER</span>
-              <span>v2026.1</span>
             </React.Fragment>
           ))}
         </div>

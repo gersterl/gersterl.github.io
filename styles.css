@@ -104,33 +104,38 @@ body::before {
 .nav-link:hover::after,
 .nav-link.is-active::after { transform: scaleX(1); }
 
-/* ─── Work rows ─────────────────────────────────────────────── */
+/* ─── Work rows (expand on hover) ───────────────────────────── */
 .work-row {
-  display: grid;
-  grid-template-columns: 52px 1fr auto;
-  align-items: center; gap: 24px;
-  padding: 26px 0;
-  border-top: 0.5px solid var(--rule);
-  cursor: pointer;
-  transition: padding-left 280ms var(--ease-out), background 200ms;
   position: relative;
-  border-radius: var(--r-sm);
+  overflow: hidden;
+  border-top: 0.5px solid var(--rule);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  /* height controlled inline via React state */
+  transition:
+    height 420ms cubic-bezier(0.32, 0.72, 0, 1),
+    border-color 260ms,
+    padding-left 300ms var(--ease-out);
 }
 .work-row:last-child { border-bottom: 0.5px solid var(--rule); }
-.work-row:hover { padding-left: 10px; background: var(--amber-3); }
-.work-row-num {
-  font-family: var(--font-mono); font-size: 10px;
-  letter-spacing: 0.1em; color: var(--text-4);
-  transition: color 200ms;
+
+/* ─── Card hover lift ────────────────────────────────────────── */
+.card-lift {
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+  cursor: pointer;
 }
-.work-row:hover .work-row-num { color: var(--amber); }
-.work-row-arrow {
-  font-family: var(--font-mono); font-size: 14px;
-  color: var(--text-4);
-  transition: transform 260ms var(--ease-out), color 200ms;
-  display: inline-block;
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 48px -16px rgba(0,0,0,0.55), 0 0 0 0.5px var(--rule-2);
 }
-.work-row:hover .work-row-arrow { transform: translateX(6px); color: var(--amber); }
+.card-lift:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: 80ms;
+}
+
+/* ─── Haptic button press ────────────────────────────────────── */
+.btn-haptic { transition: opacity 180ms, transform 80ms; }
+.btn-haptic:active { transform: scale(0.96) translateY(1px) !important; }
 
 /* ─── Marquee ───────────────────────────────────────────────── */
 @keyframes marquee {

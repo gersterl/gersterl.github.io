@@ -91,7 +91,7 @@ function AerospacePage({ onNav }) {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
           {things.map((c) => (
-            <div key={c.n} style={{
+            <div key={c.n} className="card-lift" style={{
               background: "var(--bg-2)", border: "0.5px solid var(--rule)",
               borderRadius: "var(--r-md)", padding: 22,
               display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 210,

@@ -170,12 +170,12 @@ function PoseTracker() {
                 <p style={{ fontSize: 13, lineHeight: 1.55, margin: "0 0 20px", textAlign: "center", maxWidth: 300, color: "var(--text-2)" }}>
                   Enable your camera and the system detects your arms in real time, computing the joint angles.
                 </p>
-                <button onClick={start} style={{
+                <button className="btn-haptic" onClick={start} style={{
                   background: "var(--amber)", color: "var(--bg)",
                   border: "none", padding: "11px 24px", borderRadius: 999,
                   fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.14em",
                   fontWeight: 500, textTransform: "uppercase",
-                  transition: "opacity 180ms",
+                  transition: "opacity 180ms, transform 80ms",
                 }}
                   onMouseEnter={e => { e.currentTarget.style.opacity = "0.82"; }}
                   onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
@@ -349,7 +349,7 @@ function SoftwarePage({ onNav }) {
             { n: "03", t: "Reduce",   d: "Keep shoulder/elbow/wrist. Compute 4 joint angles." },
             { n: "04", t: "Drive",    d: "Stream over serial to ESP32. Steppers track in closed loop." },
           ].map((s, i) => (
-            <div key={i} style={{
+            <div key={i} className="card-lift" style={{
               padding: 20,
               borderRight: i < 3 ? "0.5px solid var(--rule)" : "none",
             }}>

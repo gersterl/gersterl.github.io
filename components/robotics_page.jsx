@@ -272,7 +272,7 @@ function RoboticsPage({ onNav }) {
             { t: "Control",     d: "ESP32. Per-joint step/dir for steppers, PWM for BLDCs. Streams from a host script." },
             { t: "Position sense", d: "V1/V2 ran open-loop on stepper counts. V3 added AS5600 magnetic absolute encoders on every joint — closed loop, no homing dance on boot." },
           ].map((it, i) => (
-            <div key={i} style={{
+            <div key={i} className="card-lift" style={{
               background: "var(--bg-2)", border: "0.5px solid var(--rule)",
               borderRadius: "var(--r-md)", padding: 18,
             }}>

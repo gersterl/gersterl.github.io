@@ -1,5 +1,4 @@
 /* global React, Icon, Footer */
-// CV page — only the CV. Contact lives on its own page.
 
 function CVPage({ onNav }) {
   const ed = [
@@ -20,43 +19,53 @@ function CVPage({ onNav }) {
   ];
   const skills = [
     { head: "CAD & manufacturing", items: ["Fusion 360", "FDM (Bambu Lab X1E, Ender 3 V3 SE)", "Hand layup composites", "Manual machining"] },
-    { head: "Programming", items: ["Python (numpy, scipy)", "C / C++ on ESP32", "MATLAB", "Git, the basics"] },
-    { head: "Languages", items: ["German — native", "English — fluent", "French — conversational"] },
-    { head: "Software systems", items: ["MediaPipe / pose tracking", "Serial protocols (UART)", "Closed-loop control (AS5600)"] },
+    { head: "Programming",         items: ["Python (numpy, scipy)", "C / C++ on ESP32", "MATLAB", "Git, the basics"] },
+    { head: "Languages",           items: ["German — native", "English — fluent", "French — conversational"] },
+    { head: "Software systems",    items: ["MediaPipe / pose tracking", "Serial protocols (UART)", "Closed-loop control (AS5600)"] },
   ];
 
   return (
-    <div className="page" data-screen-label="05 CV" style={{ color: "var(--ink)" }}>
+    <div className="page" style={{ color: "var(--text)" }}>
+      <div style={{ height: 57 }} />
 
-      {/* HERO — title left, round portrait right */}
+      {/* ── HERO ─────────────────────────────────────────────── */}
       <div style={{
-        borderBottom: "0.5px solid var(--rule)", padding: "56px 28px 40px",
-        display: "grid", gridTemplateColumns: "1fr auto", gap: 36, alignItems: "center",
+        borderBottom: "0.5px solid var(--rule)", padding: "60px 40px 44px",
+        display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center",
+        background: "var(--bg-1)",
       }}>
         <div>
-          <div className="eyebrow" style={{ color: "rgba(28,27,23,0.5)", marginBottom: 18 }}>— 04 / CURRICULUM VITÆ</div>
-          <h1 className="serif" style={{
-            fontSize: 88, lineHeight: 0.92, letterSpacing: "-0.032em", margin: 0, color: "var(--ink)",
+          <div className="eyebrow" style={{ color: "var(--amber)", marginBottom: 20 }}>
+            04 / Curriculum Vitæ
+          </div>
+          <h1 style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "clamp(44px, 6vw, 84px)",
+            fontWeight: 500, lineHeight: 0.96,
+            letterSpacing: "-0.03em", margin: "0 0 24px",
           }}>
-            One page,<br /><span className="italic" style={{ color: "var(--aero-accent)" }}>honest weight.</span>
+            One page,<br />
+            <span style={{ color: "var(--amber)", fontWeight: 400 }}>honest weight.</span>
           </h1>
-          <p style={{ fontSize: 15.5, lineHeight: 1.55, color: "rgba(28,27,23,0.78)", maxWidth: 520, margin: "22px 0 0", textWrap: "pretty" }}>
+          <p style={{ fontSize: 15, lineHeight: 1.6, color: "var(--text-2)", maxWidth: 500 }}>
             A short résumé. I'd rather show the work — but here are the dates, the languages, the tools.
           </p>
         </div>
+
+        {/* Portrait */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
           <div style={{
-            width: 168, height: 168, borderRadius: "50%", overflow: "hidden",
-            border: "0.5px solid rgba(28,27,23,0.15)",
-            boxShadow: "0 16px 36px -18px rgba(28,27,23,0.35)",
+            width: 160, height: 160, borderRadius: "50%", overflow: "hidden",
+            border: "0.5px solid var(--rule-2)",
+            boxShadow: "0 20px 48px -18px rgba(0,0,0,0.7)",
           }}>
             <img
               src="assets/portrait.png"
               alt="Portrait of Lukas Gerster"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
-          <div className="mono" style={{ fontSize: 10, color: "rgba(28,27,23,0.55)", letterSpacing: "0.14em", textAlign: "center", lineHeight: 1.7 }}>
+          <div className="mono" style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.14em", textAlign: "center", lineHeight: 1.8 }}>
             DE / EN / FR<br />
             B. 2006 · WINTERTHUR<br />
             ETH ZÜRICH · '27
@@ -64,29 +73,34 @@ function CVPage({ onNav }) {
         </div>
       </div>
 
-      {/* TWO COLUMN: timeline + skills */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: 0 }}>
+      {/* ── TWO-COLUMN: timeline + skills ──────────────────────── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr" }}>
         {/* Left — timeline */}
-        <div style={{ padding: "36px 28px 28px", borderRight: "0.5px solid var(--rule)" }}>
-          <div className="eyebrow" style={{ marginBottom: 14, color: "rgba(28,27,23,0.5)" }}>— EDUCATION</div>
-          {ed.map((r, i) => <CVRow key={i} {...r} accent="var(--aero-accent)" />)}
+        <div style={{ padding: "36px 40px 36px", borderRight: "0.5px solid var(--rule)" }}>
+          <div className="eyebrow" style={{ marginBottom: 16 }}>Education</div>
+          {ed.map((r, i) => <CVRow key={i} {...r} accentColor="var(--amber)" />)}
 
-          <div className="eyebrow" style={{ margin: "32px 0 14px", color: "rgba(28,27,23,0.5)" }}>— WORK / PROJECTS</div>
-          {work.map((r, i) => <CVRow key={i} {...r} accent="var(--robo-ink)" />)}
+          <div className="eyebrow" style={{ margin: "32px 0 16px" }}>Work / Projects</div>
+          {work.map((r, i) => <CVRow key={i} {...r} accentColor="#6FBA8A" />)}
 
-          <div className="eyebrow" style={{ margin: "32px 0 14px", color: "rgba(28,27,23,0.5)" }}>— LEADERSHIP</div>
-          {leadership.map((r, i) => <CVRow key={i} {...r} accent="var(--soft-ink)" />)}
+          <div className="eyebrow" style={{ margin: "32px 0 16px" }}>Leadership</div>
+          {leadership.map((r, i) => <CVRow key={i} {...r} accentColor="#9BB8C8" />)}
         </div>
 
         {/* Right — skills */}
-        <div style={{ padding: "36px 28px 28px", background: "var(--cream-2)" }}>
-          <div className="eyebrow" style={{ marginBottom: 14, color: "rgba(28,27,23,0.5)" }}>— STACK</div>
+        <div style={{ padding: "36px 32px 36px", background: "var(--bg-1)" }}>
+          <div className="eyebrow" style={{ marginBottom: 16 }}>Stack</div>
           {skills.map((s, i) => (
-            <div key={i} style={{ marginBottom: 22 }}>
-              <div className="serif" style={{ fontSize: 17, letterSpacing: "-0.005em", marginBottom: 8 }}>{s.head}</div>
+            <div key={i} style={{ marginBottom: 24 }}>
+              <div style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.005em", marginBottom: 8 }}>
+                {s.head}
+              </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {s.items.map((it, j) => (
-                  <li key={j} className="mono" style={{ fontSize: 12, color: "rgba(28,27,23,0.7)", padding: "3px 0", letterSpacing: "0.02em" }}>
+                  <li key={j} className="mono" style={{
+                    fontSize: 12, color: "var(--text-2)",
+                    padding: "3px 0", letterSpacing: "0.02em",
+                  }}>
                     {it}
                   </li>
                 ))}
@@ -97,9 +111,9 @@ function CVPage({ onNav }) {
       </div>
 
       <Footer
-        left="← SOFTWARE"
+        left="← Software"
         center="04 / CV"
-        right="CONTACT →"
+        right="Contact →"
         onLeft={() => onNav("software")}
         onRight={() => onNav("contact")}
       />
@@ -107,31 +121,31 @@ function CVPage({ onNav }) {
   );
 }
 
-function CVRow({ yrs, inst, role, note, accent, href }) {
+function CVRow({ yrs, inst, role, note, accentColor, href }) {
   const inner = (
     <>
-      <div className="mono" style={{ fontSize: 11, color: "rgba(28,27,23,0.5)", letterSpacing: "0.1em", paddingTop: 4 }}>
+      <div className="mono" style={{ fontSize: 11, color: "var(--text-3)", letterSpacing: "0.08em", paddingTop: 3 }}>
         {yrs}
       </div>
       <div>
-        <div className="serif" style={{ fontSize: 19, letterSpacing: "-0.01em", lineHeight: 1.2 }}>
-          {inst} <span style={{ color: "rgba(28,27,23,0.5)" }}>— </span><span className="italic" style={{ color: accent }}>{role}</span>
-          {href && <Icon name="external" size={12} color="rgba(28,27,23,0.4)" style={{ marginLeft: 8, verticalAlign: "baseline" }}/>}
+        <div style={{ fontSize: 17, letterSpacing: "-0.01em", lineHeight: 1.2, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+          <span>{inst}</span>
+          <span style={{ color: "var(--text-3)" }}>·</span>
+          <span style={{ fontStyle: "italic", color: accentColor }}>{role}</span>
+          {href && <Icon name="external" size={11} color="var(--text-3)" />}
         </div>
-        <div style={{ fontSize: 13.5, color: "rgba(28,27,23,0.7)", marginTop: 4, lineHeight: 1.55, textWrap: "pretty" }}>{note}</div>
+        <div style={{ fontSize: 13.5, color: "var(--text-2)", marginTop: 4, lineHeight: 1.55 }}>{note}</div>
       </div>
     </>
   );
-  const baseStyle = {
-    display: "grid", gridTemplateColumns: "140px 1fr", gap: 20,
-    padding: "14px 0", borderTop: "0.5px solid rgba(28,27,23,0.1)",
-    color: "inherit", textDecoration: "none",
+  const style = {
+    display: "grid", gridTemplateColumns: "130px 1fr", gap: 20,
+    padding: "14px 0", borderTop: "0.5px solid var(--rule)",
+    color: "inherit",
   };
-  return href ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" style={baseStyle}>{inner}</a>
-  ) : (
-    <div style={baseStyle}>{inner}</div>
-  );
+  return href
+    ? <a href={href} target="_blank" rel="noopener noreferrer" style={style}>{inner}</a>
+    : <div style={style}>{inner}</div>;
 }
 
 window.CVPage = CVPage;

@@ -1,9 +1,7 @@
 /* global React */
-// Shared atoms — exposed on window for sibling babel scripts.
 
 const { useState, useEffect, useRef, useMemo, useCallback } = React;
 
-// Tabler-ish inline icons (kept light; only the few we actually need).
 function Icon({ name, size = 20, stroke = 1.6, color = "currentColor", style }) {
   const props = {
     width: size, height: size, viewBox: "0 0 24 24",
@@ -25,25 +23,21 @@ function Icon({ name, size = 20, stroke = 1.6, color = "currentColor", style }) 
     case "arrow-left":
       return <svg {...props}><path d="M19 12H5M11 18l-6-6 6-6"/></svg>;
     case "github":
-      return <svg {...props}><path d="M9 19c-4.3 1.4-4.3-2.5-6-3M15 21v-3.5a3 3 0 0 0-1-2.3c3.1-.3 6-1.5 6-7a5.4 5.4 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8s-1.2-.3-3.9 1.5a13.4 13.4 0 0 0-7 0C4.8 .6 3.6.9 3.6.9a5 5 0 0 0-.1 3.8A5.4 5.4 0 0 0 2 8.5c0 5.5 2.9 6.7 6 7a3 3 0 0 0-1 2.3V21"/></svg>;
+      return <svg {...props}><path d="M9 19c-4.3 1.4-4.3-2.5-6-3M15 21v-3.5a3 3 0 0 0-1-2.3c3.1-.3 6-1.5 6-7a5.4 5.4 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8s-1.2-.3-3.9 1.5a13.4 13.4 0 0 0-7 0C4.8.6 3.6.9 3.6.9a5 5 0 0 0-.1 3.8A5.4 5.4 0 0 0 2 8.5c0 5.5 2.9 6.7 6 7a3 3 0 0 0-1 2.3V21"/></svg>;
     case "external":
       return <svg {...props}><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5M15 3h6v6M10 14L20 4"/></svg>;
-    case "dot":
-      return <svg {...props}><circle cx="12" cy="12" r="3" fill={color} stroke="none"/></svg>;
     default:
       return null;
   }
 }
 
-// Nav bar — pure presentational, navigation handled by parent.
-function NavBar({ current, onNav, accent = "var(--ink)" }) {
+function NavBar({ current, onNav }) {
   const items = [
     { id: "index", label: "Index" },
-    { id: "work", label: "Work" },
-    { id: "cv", label: "CV" },
+    { id: "work",  label: "Work" },
+    { id: "cv",    label: "CV" },
     { id: "contact", label: "Contact" },
   ];
-  // "Work" is a meta — clicking it goes back to index for now.
   const handle = (id) => () => onNav(id === "work" ? "index" : id);
   const isActive = (id) => {
     if (id === "index") return current === "index";
@@ -53,27 +47,29 @@ function NavBar({ current, onNav, accent = "var(--ink)" }) {
     return false;
   };
   return (
-    <div style={{
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
       display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "18px 28px", borderBottom: "0.5px solid rgba(28,27,23,0.15)",
-      position: "sticky", top: 0, zIndex: 100,
-      background: "rgba(244,241,234,0.88)",
-      backdropFilter: "blur(12px)",
-      WebkitBackdropFilter: "blur(12px)",
+      padding: "18px 40px",
+      background: "rgba(13,13,11,0.92)",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      borderBottom: "0.5px solid rgba(237,232,222,0.07)",
     }}>
       <div
-        className="serif"
         onClick={() => onNav("index")}
         style={{
-          fontSize: 20, fontStyle: "italic", letterSpacing: "-0.01em", color: "var(--ink)", cursor: "pointer",
-          transition: "opacity 200ms cubic-bezier(0.23, 1, 0.32, 1)",
+          fontFamily: "var(--font-mono)", fontSize: 11,
+          letterSpacing: "0.18em", textTransform: "uppercase",
+          color: "var(--text)", cursor: "pointer",
+          transition: "opacity 180ms",
         }}
-        onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
-        onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+        onMouseEnter={e => { e.currentTarget.style.opacity = "0.6"; }}
+        onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
       >
         Lukas Gerster
       </div>
-      <div style={{ display: "flex", gap: 28, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(28,27,23,0.55)", fontFamily: "var(--font-mono)" }}>
+      <div style={{ display: "flex", gap: 28, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>
         {items.map(it => (
           <span
             key={it.id}
@@ -84,43 +80,49 @@ function NavBar({ current, onNav, accent = "var(--ink)" }) {
           </span>
         ))}
       </div>
-      <div className="mono" style={{ fontSize: 11, color: "rgba(28,27,23,0.45)", letterSpacing: "0.08em" }}>ETH ZÜRICH</div>
-    </div>
+    </nav>
   );
 }
 
-// Footer — shared across pages
-function Footer({ left = "← INDEX", center = "", right = "" , onLeft, onRight }) {
+function Footer({ left = "", center = "", right = "", onLeft, onRight }) {
+  const linkStyle = (hasHandler) => ({
+    cursor: hasHandler ? "pointer" : "default",
+    transition: "color 150ms",
+  });
   return (
     <div style={{
-      padding: "18px 28px", display: "flex", justifyContent: "space-between",
-      fontFamily: "var(--font-mono)", fontSize: 10, color: "rgba(28,27,23,0.55)",
-      letterSpacing: "0.08em", borderTop: "0.5px solid rgba(28,27,23,0.15)",
+      padding: "18px 40px", display: "flex", justifyContent: "space-between",
+      fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-3)",
+      letterSpacing: "0.1em", borderTop: "0.5px solid var(--rule)",
     }}>
-      <span style={{ cursor: onLeft ? "pointer" : "default" }} onClick={onLeft}>{left}</span>
+      <span
+        style={linkStyle(!!onLeft)}
+        onMouseEnter={e => onLeft && (e.currentTarget.style.color = "var(--text-2)")}
+        onMouseLeave={e => (e.currentTarget.style.color = "var(--text-3)")}
+        onClick={onLeft}
+      >{left}</span>
       <span>{center}</span>
-      <span style={{ cursor: onRight ? "pointer" : "default" }} onClick={onRight}>{right}</span>
+      <span
+        style={linkStyle(!!onRight)}
+        onMouseEnter={e => onRight && (e.currentTarget.style.color = "var(--text-2)")}
+        onMouseLeave={e => (e.currentTarget.style.color = "var(--text-3)")}
+        onClick={onRight}
+      >{right}</span>
     </div>
   );
 }
 
-// Striped placeholder block — for unfilled imagery slots.
-function PlaceholderArt({ label, height = 220, tint = "rgba(28,27,23,0.5)", bg = "#EBE6DB", children }) {
+function PlaceholderArt({ label, height = 220, children }) {
   return (
     <div className="placeholder-stripe" style={{
-      background: bg,
-      borderRadius: "var(--border-radius-lg)",
-      height,
+      background: "var(--bg-2)", borderRadius: "var(--r-md)", height,
       display: "flex", alignItems: "center", justifyContent: "center",
       position: "relative", overflow: "hidden",
-      border: "0.5px solid rgba(28,27,23,0.08)",
+      border: "0.5px solid var(--rule)",
     }}>
       {children}
       {label && (
-        <div className="mono" style={{
-          position: "absolute", bottom: 12, left: 14,
-          fontSize: 10, color: tint, letterSpacing: "0.12em", textTransform: "uppercase",
-        }}>
+        <div className="eyebrow" style={{ position: "absolute", bottom: 12, left: 14 }}>
           {label}
         </div>
       )}
@@ -128,18 +130,4 @@ function PlaceholderArt({ label, height = 220, tint = "rgba(28,27,23,0.5)", bg =
   );
 }
 
-// Page section header — eyebrow + serif title
-function SectionHead({ eyebrow, title, italic, color = "var(--ink)" }) {
-  return (
-    <div style={{ marginBottom: 22 }}>
-      <div className="eyebrow" style={{ marginBottom: 12, color: "rgba(28,27,23,0.5)" }}>{eyebrow}</div>
-      <h2 className="serif" style={{
-        fontSize: 36, lineHeight: 1, letterSpacing: "-0.02em", margin: 0, color,
-      }}>
-        {title}{italic ? <> <span className="italic">{italic}</span></> : null}
-      </h2>
-    </div>
-  );
-}
-
-Object.assign(window, { Icon, NavBar, Footer, PlaceholderArt, SectionHead });
+Object.assign(window, { Icon, NavBar, Footer, PlaceholderArt });

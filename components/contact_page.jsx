@@ -1,68 +1,86 @@
 /* global React, Icon, Footer */
-// Contact — minimal page. Just the contact box, with the round portrait.
 
 function ContactPage({ onNav }) {
   const links = [
-    { label: "EMAIL", value: "gersterl@student.ethz.ch", icon: "external", href: "mailto:gersterl@student.ethz.ch" },
-    { label: "GITHUB", value: "github.com/gersterl", icon: "github", href: "https://github.com/gersterl" },
-    { label: "PFADI", value: "pfadibubenberg.ch", icon: "external", href: "https://pfadibubenberg.ch/leitungsteam/" },
+    { label: "Email",  value: "gersterl@student.ethz.ch", icon: "external", href: "mailto:gersterl@student.ethz.ch" },
+    { label: "GitHub", value: "github.com/gersterl",       icon: "github",   href: "https://github.com/gersterl" },
+    { label: "Pfadi",  value: "pfadibubenberg.ch",         icon: "external", href: "https://pfadibubenberg.ch/leitungsteam/" },
   ];
 
   return (
-    <div className="page" data-screen-label="06 Contact" style={{ color: "var(--ink)", minHeight: 640, display: "flex", flexDirection: "column" }}>
+    <div className="page" style={{ color: "var(--text)", minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
+      <div style={{ height: 57 }} />
 
-      <div style={{ flex: 1, padding: "72px 28px 36px", display: "flex", alignItems: "center" }}>
+      <div style={{ flex: 1, padding: "72px 40px 40px", display: "flex", alignItems: "center" }}>
         <div style={{
-          background: "var(--ink)", color: "var(--cream)", borderRadius: "var(--border-radius-lg)",
-          padding: "40px 40px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center",
-          width: "100%",
+          background: "var(--bg-1)", border: "0.5px solid var(--rule-2)",
+          borderRadius: "var(--r-lg)", padding: "48px 48px",
+          display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center",
+          width: "100%", maxWidth: 880, margin: "0 auto",
         }}>
-          {/* Left — pitch + portrait */}
+          {/* Left — intro */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 26 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 32 }}>
               <div style={{
-                width: 80, height: 80, borderRadius: "50%", overflow: "hidden",
-                flexShrink: 0, border: "0.5px solid rgba(244,241,234,0.2)",
-                boxShadow: "0 8px 24px -10px rgba(0,0,0,0.6)",
+                width: 72, height: 72, borderRadius: "50%", overflow: "hidden",
+                flexShrink: 0, border: "0.5px solid var(--rule-2)",
+                boxShadow: "0 12px 32px -10px rgba(0,0,0,0.7)",
               }}>
-                <img src="assets/portrait.png" alt="Portrait of Lukas Gerster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}/>
+                <img src="assets/portrait.png" alt="Portrait of Lukas Gerster" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
               <div>
-                <div className="serif" style={{ fontSize: 22, letterSpacing: "-0.01em", lineHeight: 1.1 }}>
-                  Lukas <span className="italic" style={{ color: "var(--robo)" }}>Gerster</span>
-                </div>
-                <div className="mono" style={{ fontSize: 10, color: "rgba(244,241,234,0.55)", letterSpacing: "0.14em", marginTop: 4 }}>
+                <div style={{ fontSize: 20, fontWeight: 500, letterSpacing: "-0.01em" }}>Lukas Gerster</div>
+                <div className="mono" style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.14em", marginTop: 4 }}>
                   WINTERTHUR · ETH ZÜRICH
                 </div>
               </div>
             </div>
 
-            <div className="mono" style={{ fontSize: 10, color: "rgba(244,241,234,0.55)", letterSpacing: "0.14em", marginBottom: 14 }}>
-              — REACH OUT
-            </div>
-            <h3 className="serif" style={{ fontSize: 36, margin: 0, letterSpacing: "-0.018em", lineHeight: 1.05, textWrap: "balance" }}>
-              Open to internships, <span className="italic" style={{ color: "var(--robo)" }}>workshop time</span>, and unusual problems.
-            </h3>
+            <div className="eyebrow" style={{ marginBottom: 14 }}>Reach out</div>
+            <h2 style={{
+              fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 500,
+              letterSpacing: "-0.018em", lineHeight: 1.1,
+            }}>
+              Open to internships,{" "}
+              <span style={{ color: "var(--amber)", fontWeight: 400 }}>workshop time</span>,
+              and unusual problems.
+            </h2>
           </div>
 
           {/* Right — links */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {links.map((c, i) => (
-              <a key={i} href={c.href} target="_blank" rel="noopener noreferrer" style={{
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-                padding: "14px 18px", border: "0.5px solid rgba(244,241,234,0.18)", borderRadius: 8,
-                color: "inherit", textDecoration: "none",
-                transition: "background 200ms cubic-bezier(0.23, 1, 0.32, 1), border-color 200ms cubic-bezier(0.23, 1, 0.32, 1), transform 100ms cubic-bezier(0.23, 1, 0.32, 1)",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = "rgba(244,241,234,0.06)"; e.currentTarget.style.borderColor = "rgba(244,241,234,0.35)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(244,241,234,0.18)"; e.currentTarget.style.transform = "none"; }}
-              onMouseDown={e => { e.currentTarget.style.transform = "scale(0.985)"; }}
-              onMouseUp={e => { e.currentTarget.style.transform = "none"; }}
+              <a
+                key={i}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "14px 18px",
+                  border: "0.5px solid var(--rule)",
+                  borderRadius: "var(--r-md)",
+                  color: "inherit",
+                  transition: "background 180ms, border-color 180ms, transform 100ms",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = "var(--amber-2)";
+                  e.currentTarget.style.borderColor = "rgba(234,169,78,0.35)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.borderColor = "var(--rule)";
+                  e.currentTarget.style.transform = "none";
+                }}
+                onMouseDown={e => { e.currentTarget.style.transform = "scale(0.985)"; }}
+                onMouseUp={e => { e.currentTarget.style.transform = "none"; }}
               >
-                <div className="mono" style={{ fontSize: 10, color: "rgba(244,241,234,0.55)", letterSpacing: "0.14em" }}>{c.label}</div>
-                <div className="mono" style={{ fontSize: 13, color: "var(--cream)", display: "flex", alignItems: "center", gap: 10 }}>
+                <div className="mono" style={{ fontSize: 9, color: "var(--text-3)", letterSpacing: "0.16em", textTransform: "uppercase" }}>
+                  {c.label}
+                </div>
+                <div className="mono" style={{ fontSize: 12, color: "var(--text)", display: "flex", alignItems: "center", gap: 10 }}>
                   {c.value}
-                  <Icon name={c.icon} size={14} color="rgba(244,241,234,0.7)"/>
+                  <Icon name={c.icon} size={13} color="var(--text-3)" />
                 </div>
               </a>
             ))}
@@ -72,8 +90,8 @@ function ContactPage({ onNav }) {
 
       <Footer
         left="← CV"
-        center="05 / CONTACT"
-        right="INDEX →"
+        center="05 / Contact"
+        right="Index →"
         onLeft={() => onNav("cv")}
         onRight={() => onNav("index")}
       />

@@ -18,8 +18,8 @@ const CX = (COLS - 1) / 2;    // 2.5
 const CY = (ROWS - 1) / 2;    // 1.5
 
 const SHELL_THRESHOLDS = [0.80, 1.60, 2.20, 2.70];
-const SHELL_GAP  = 520;   // ms between each shell firing
-const PANEL_DUR  = 680;   // ms each panel takes to retract
+const SHELL_GAP  = 150;   // ms between each shell firing
+const PANEL_DUR  = 440;   // ms each panel takes to retract
 const PANEL_EASE = "cubic-bezier(0.32, 0.72, 0, 1)"; // spring — fast, decisive
 
 function getShell(dist) {
@@ -49,11 +49,11 @@ function IntroOverlay({ onComplete }) {
       fired = true;
       clearInterval(dotTimer);
       setSurging(true);                        // reactor power surge
-      setTimeout(() => setRetracting(true), 300); // 300ms surge before panels move
+      setTimeout(() => setRetracting(true), 150); // 150ms surge before panels move
     }
 
     const dotTimer = setInterval(() => setDots(d => (d + 1) % 4), 380);
-    const autoTimer = setTimeout(startRetract, 2200);
+    const autoTimer = setTimeout(startRetract, 900);
     document.addEventListener("click", startRetract, { once: true });
 
     return () => {
@@ -67,7 +67,7 @@ function IntroOverlay({ onComplete }) {
   useEffect(() => {
     if (!retracting) return;
     const lastShell   = SHELL_THRESHOLDS.length;           // 4
-    const totalDelay  = lastShell * SHELL_GAP + PANEL_DUR + 480;
+    const totalDelay  = lastShell * SHELL_GAP + PANEL_DUR + 250;
     const t = setTimeout(onComplete, totalDelay);
     return () => clearTimeout(t);
   }, [retracting, onComplete]);
@@ -79,8 +79,11 @@ function IntroOverlay({ onComplete }) {
   return (
     <div style={{
       position: "fixed", inset: 0, zIndex: 99999,
-      background: "#040810", overflow: "hidden",
+      background: retracting ? "transparent" : "#040810",
+      transition: retracting ? "background 200ms ease 80ms" : "none",
+      overflow: "hidden",
       cursor: retracting ? "default" : "pointer",
+      pointerEvents: retracting ? "none" : "auto",
     }}>
 
       {/* Persistent HUD grid */}

@@ -72,8 +72,9 @@ function IndexPage({ onNav }) {
           style={{
             position: "absolute", inset: 0,
             width: "100%", height: "100%",
-            objectFit: "cover", objectPosition: "25% 18%",
-            filter: "grayscale(1) contrast(1.1) brightness(0.18)",
+            objectFit: "cover", objectPosition: "75% 18%",
+            filter: "grayscale(1) contrast(1.05) brightness(0.34)",
+            transform: "scaleX(-1)",
             zIndex: 0,
           }}
         />

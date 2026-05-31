@@ -4,7 +4,7 @@ function CVPage({ onNav }) {
   const ed = [
     { yrs: "2024 — present", inst: "ETH Zürich", role: "BSc Mechanical Engineering", note: "Maschinenbau · expected 2027" },
     {
-      yrs: "2018 — 2024", inst: "Kantonsschule Im Lee", role: "Matura · chemistry & biology focus",
+      yrs: "2018 — 2024", inst: "Kantonsschule Im Lee", role: "STEM / MINT Matura · science focus",
       note: "Maturarbeit on the efficiency of different electrode materials for hydrogen electrolysis.",
       file: { href: "assets/maturarbeit-lukas-gerster.pdf", name: "Maturarbeit-Lukas-Gerster.pdf", label: "Maturarbeit (PDF)" },
     },

@@ -1,23 +1,32 @@
 /* global React, ReactDOM, NavBar, IntroOverlay, IndexPage, AerospacePage, RoboticsPage, SoftwarePage, CVPage, ContactPage */
 
-const { useState } = React;
+const { useState, useEffect, useRef } = React;
 
 function App() {
   const [page, setPage] = useState("index");
   const [showIntro, setShowIntro] = useState(!sessionStorage.getItem("intro-done"));
+  const pendingAnchor = useRef(null);
 
-  const nav = (p, anchor) => {
-    setPage(p);
-    // Wait for the target page to commit, then scroll: to the anchored
-    // section if one was requested, otherwise back to the top.
+  // Scroll: to the requested section if one is pending, else to the top.
+  // Runs in rAF so the freshly-committed page has been laid out first.
+  const runScroll = () => {
+    const anchor = pendingAnchor.current;
+    pendingAnchor.current = null;
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const el = anchor && document.getElementById(anchor);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        else window.scrollTo({ top: 0, behavior: "smooth" });
-      });
+      const el = anchor && document.getElementById(anchor);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
     });
   };
+
+  const nav = (p, anchor) => {
+    pendingAnchor.current = anchor || null;
+    if (p === page) runScroll();   // same page: section already mounted
+    else setPage(p);               // page change: scroll after commit (effect below)
+  };
+
+  // After a page change commits, the target section exists in the DOM.
+  useEffect(() => { runScroll(); }, [page]);
 
   let body;
   switch (page) {

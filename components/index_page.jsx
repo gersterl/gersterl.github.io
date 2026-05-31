@@ -110,7 +110,7 @@ function IndexPage({ onNav }) {
           pointerEvents: "none",
           animation: "staggerIn 600ms var(--ease-out) 1.2s both",
         }}>
-          <div className="mono" style={{ fontSize: 8.5, color: "rgba(0,212,255,0.45)", letterSpacing: "0.22em", lineHeight: 2.2 }}>
+          <div className="mono" style={{ fontSize: 8.5, color: "rgba(0,212,255,0.55)", letterSpacing: "0.22em", lineHeight: 2.2 }}>
             <div>SYS <span style={{ color: "rgba(0,212,255,0.8)" }}>ONLINE</span></div>
             <div>47.4979° N / 8.7280° E</div>
             <div>ETH ZÜRICH · BSC-ME</div>
@@ -123,7 +123,7 @@ function IndexPage({ onNav }) {
           textAlign: "right", pointerEvents: "none",
           animation: "staggerIn 600ms var(--ease-out) 1.3s both",
         }}>
-          <div className="mono" style={{ fontSize: 8.5, color: "rgba(0,212,255,0.35)", letterSpacing: "0.22em", lineHeight: 2.2 }}>
+          <div className="mono" style={{ fontSize: 8.5, color: "rgba(0,212,255,0.55)", letterSpacing: "0.22em", lineHeight: 2.2 }}>
             <div>TRACKS · 03</div>
             <div>PROJECTS · ACTIVE</div>
             <div>2026.05.26</div>

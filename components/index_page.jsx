@@ -82,7 +82,7 @@ function IndexPage({ onNav }) {
         {/* Dark overlay */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
-          background: "linear-gradient(140deg, rgba(4,8,16,0.62) 0%, rgba(4,8,16,0.30) 50%, rgba(4,8,16,0.68) 100%)",
+          background: "linear-gradient(140deg, rgba(4,8,16,0.88) 0%, rgba(4,8,16,0.55) 50%, rgba(4,8,16,0.92) 100%)",
         }} />
 
         {/* Cyan radial glow — left anchor */}

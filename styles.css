@@ -6,15 +6,15 @@
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
 
   /* Palette — Iron Grid */
-  --bg:   #0B1322;
-  --bg-1: #111B2E;
-  --bg-2: #18243A;
-  --bg-3: #1F2D46;
+  --bg:   #101A2D;
+  --bg-1: #17243B;
+  --bg-2: #1F2E48;
+  --bg-3: #283956;
 
-  --text:   #E4F0FF;
-  --text-2: rgba(228,240,255,0.60);
-  --text-3: rgba(228,240,255,0.34);
-  --text-4: rgba(228,240,255,0.16);
+  --text:   #EAF3FF;
+  --text-2: rgba(234,243,255,0.72);
+  --text-3: rgba(234,243,255,0.52);
+  --text-4: rgba(234,243,255,0.30);
 
   --cyan:   #00D4FF;
   --cyan-2: rgba(0,212,255,0.10);

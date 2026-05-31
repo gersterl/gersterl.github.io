@@ -69,7 +69,7 @@ function NavBar({ current, onNav }) {
       >
         Lukas Gerster
       </div>
-      <div style={{ display: "flex", gap: 28, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+      <div style={{ display: "flex", gap: 30, fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase" }}>
         {items.map(it => (
           <span
             key={it.id}

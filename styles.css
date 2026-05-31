@@ -109,7 +109,7 @@ body::after {
   cursor: pointer;
   position: relative; padding: 4px 0;
   transition: color 180ms;
-  color: var(--text-3);
+  color: var(--text-2);
 }
 .nav-link::after {
   content: "";
@@ -119,7 +119,7 @@ body::after {
   transform: scaleX(0); transform-origin: left;
   transition: transform 260ms var(--ease-out);
 }
-.nav-link:hover { color: var(--text-2); }
+.nav-link:hover { color: var(--text); }
 .nav-link.is-active { color: var(--text); }
 .nav-link:hover::after,
 .nav-link.is-active::after { transform: scaleX(1); }

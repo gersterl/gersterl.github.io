@@ -110,8 +110,8 @@ function IndexPage({ onNav }) {
           pointerEvents: "none",
           animation: "staggerIn 600ms var(--ease-out) 1.2s both",
         }}>
-          <div className="mono" style={{ fontSize: 8.5, color: "rgba(0,212,255,0.55)", letterSpacing: "0.22em", lineHeight: 2.2 }}>
-            <div>SYS <span style={{ color: "rgba(0,212,255,0.8)" }}>ONLINE</span></div>
+          <div className="mono" style={{ fontSize: 11, color: "rgba(120,224,255,0.92)", letterSpacing: "0.18em", lineHeight: 2.0, textShadow: "0 0 12px rgba(0,212,255,0.35)" }}>
+            <div>SYS <span style={{ color: "#9BEBFF" }}>ONLINE</span></div>
             <div>47.4979° N / 8.7280° E</div>
             <div>ETH ZÜRICH · BSC-ME</div>
           </div>
@@ -123,7 +123,7 @@ function IndexPage({ onNav }) {
           textAlign: "right", pointerEvents: "none",
           animation: "staggerIn 600ms var(--ease-out) 1.3s both",
         }}>
-          <div className="mono" style={{ fontSize: 8.5, color: "rgba(0,212,255,0.55)", letterSpacing: "0.22em", lineHeight: 2.2 }}>
+          <div className="mono" style={{ fontSize: 11, color: "rgba(120,224,255,0.92)", letterSpacing: "0.18em", lineHeight: 2.0, textShadow: "0 0 12px rgba(0,212,255,0.35)" }}>
             <div>TRACKS · 03</div>
             <div>PROJECTS · ACTIVE</div>
             <div>2026.05.26</div>
@@ -232,17 +232,17 @@ function IndexPage({ onNav }) {
           <div style={{ display: "flex", gap: 40 }}>
             {[["TRACKS", "03"], ["DOF", "5"], ["PRINTERS", "2"]].map(([k, v]) => (
               <div key={k}>
-                <div className="mono" style={{ fontSize: 8, color: "var(--text-4)", letterSpacing: "0.2em", marginBottom: 3 }}>{k}</div>
-                <div className="mono" style={{ fontSize: 14, color: "var(--cyan)", letterSpacing: "0.05em", fontWeight: 500 }}>{v}</div>
+                <div className="mono" style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.16em", marginBottom: 4 }}>{k}</div>
+                <div className="mono" style={{ fontSize: 16, color: "var(--cyan)", letterSpacing: "0.05em", fontWeight: 600 }}>{v}</div>
               </div>
             ))}
           </div>
-          <div className="mono" style={{ fontSize: 9, color: "var(--text-4)", letterSpacing: "0.14em" }}>
+          <div className="mono" style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.14em" }}>
             B. 2006 · WINTERTHUR
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span className="pulse" />
-            <span className="mono" style={{ fontSize: 9, color: "var(--text-3)", letterSpacing: "0.14em" }}>OPEN TO PROJECTS</span>
+            <span className="mono" style={{ fontSize: 11, color: "var(--text-2)", letterSpacing: "0.14em", fontWeight: 500 }}>OPEN TO PROJECTS</span>
           </div>
         </div>
       </section>

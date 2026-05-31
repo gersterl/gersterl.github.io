@@ -248,7 +248,7 @@ function IndexPage({ onNav }) {
       </section>
 
       {/* ── WORK LIST ────────────────────────────────────────── */}
-      <section id="work-list">
+      <section id="work-list" style={{ scrollMarginTop: 72 }}>
         <div style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
           padding: "48px 44px 20px",

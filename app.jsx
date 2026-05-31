@@ -6,10 +6,16 @@ function App() {
   const [page, setPage] = useState("index");
   const [showIntro, setShowIntro] = useState(!sessionStorage.getItem("intro-done"));
 
-  const nav = (p) => {
+  const nav = (p, anchor) => {
     setPage(p);
+    // Wait for the target page to commit, then scroll: to the anchored
+    // section if one was requested, otherwise back to the top.
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      requestAnimationFrame(() => {
+        const el = anchor && document.getElementById(anchor);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      });
     });
   };
 

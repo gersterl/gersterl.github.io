@@ -38,7 +38,10 @@ function NavBar({ current, onNav }) {
     { id: "cv",    label: "CV" },
     { id: "contact", label: "Contact" },
   ];
-  const handle = (id) => () => onNav(id === "work" ? "index" : id);
+  const handle = (id) => () => {
+    if (id === "work") return onNav("index", "work-list");
+    onNav(id);
+  };
   const isActive = (id) => {
     if (id === "index") return current === "index";
     if (id === "cv") return current === "cv";

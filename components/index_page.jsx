@@ -320,7 +320,7 @@ function IndexPage({ onNav }) {
 
 function WorkRow({ project: p, isHovered, onHover, onLeave, onClick }) {
   const COLLAPSED = 96;
-  const EXPANDED  = 236;
+  const EXPANDED  = 182;
 
   return (
     <div
@@ -413,7 +413,10 @@ function WorkRow({ project: p, isHovered, onHover, onLeave, onClick }) {
           transition: `opacity 320ms var(--ease-out) ${isHovered ? "80ms" : "0ms"}, transform 320ms var(--ease-out) ${isHovered ? "80ms" : "0ms"}`,
           pointerEvents: isHovered ? "auto" : "none",
         }}>
-          <div style={{ fontSize: 13.5, color: "var(--text-2)", lineHeight: 1.55, marginBottom: 14 }}>
+          <div style={{
+            fontSize: 13.5, color: "var(--text-2)", lineHeight: 1.5, marginBottom: 12,
+            display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
+          }}>
             {p.desc}
           </div>
           <div style={{ display: "flex", gap: 7, flexWrap: "wrap" }}>

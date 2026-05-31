@@ -3,7 +3,11 @@
 function CVPage({ onNav }) {
   const ed = [
     { yrs: "2024 — present", inst: "ETH Zürich", role: "BSc Mechanical Engineering", note: "Maschinenbau · expected 2027" },
-    { yrs: "2018 — 2024", inst: "Kantonsschule Im Lee", role: "Matura · chemistry & biology focus", note: "Maturarbeit on the efficiency of different electrode materials for hydrogen electrolysis." },
+    {
+      yrs: "2018 — 2024", inst: "Kantonsschule Im Lee", role: "Matura · chemistry & biology focus",
+      note: "Maturarbeit on the efficiency of different electrode materials for hydrogen electrolysis.",
+      file: { href: "assets/maturarbeit-lukas-gerster.pdf", name: "Maturarbeit-Lukas-Gerster.pdf", label: "Maturarbeit (PDF)" },
+    },
   ];
   const work = [
     { yrs: "2023 — present", inst: "Home workshop · Winterthur", role: "Hands-on building", note: "Three iterations of the robotic arm, RC airframes, the live arm-tracking pipeline." },
@@ -50,6 +54,14 @@ function CVPage({ onNav }) {
           <p style={{ fontSize: 15, lineHeight: 1.6, color: "var(--text-2)", maxWidth: 500 }}>
             A short résumé. I'd rather show the work — but here are the dates, the languages, the tools.
           </p>
+          <div style={{ marginTop: 28 }}>
+            <DownloadLink
+              href="assets/cv-lukas-gerster.pdf"
+              name="Lukas-Gerster-CV.pdf"
+              label="Download CV"
+              solid
+            />
+          </div>
         </div>
 
         {/* Portrait */}
@@ -121,7 +133,38 @@ function CVPage({ onNav }) {
   );
 }
 
-function CVRow({ yrs, inst, role, note, accentColor, href }) {
+function DownloadLink({ href, name, label, solid = false, accent = "var(--amber)" }) {
+  const base = {
+    display: "inline-flex", alignItems: "center", gap: 9,
+    fontFamily: "var(--font-mono)", fontSize: 11,
+    letterSpacing: "0.16em", textTransform: "uppercase",
+    borderRadius: 2, cursor: "pointer", textDecoration: "none",
+    transition: "background 180ms, border-color 180ms, box-shadow 180ms, transform 80ms",
+  };
+  const style = solid
+    ? { ...base, fontWeight: 700, background: "var(--cyan)", color: "#040810",
+        border: "none", padding: "13px 26px", boxShadow: "0 0 24px rgba(0,212,255,0.35)" }
+    : { ...base, color: accent, background: "rgba(0,212,255,0.05)",
+        border: "1px solid rgba(0,212,255,0.35)", padding: "9px 16px" };
+  return (
+    <a
+      href={href} download={name} className="btn-haptic" style={style}
+      onMouseEnter={e => {
+        if (solid) { e.currentTarget.style.boxShadow = "0 0 40px rgba(0,212,255,0.6)"; }
+        else { e.currentTarget.style.borderColor = "rgba(0,212,255,0.7)"; e.currentTarget.style.background = "rgba(0,212,255,0.1)"; }
+      }}
+      onMouseLeave={e => {
+        if (solid) { e.currentTarget.style.boxShadow = "0 0 24px rgba(0,212,255,0.35)"; }
+        else { e.currentTarget.style.borderColor = "rgba(0,212,255,0.35)"; e.currentTarget.style.background = "rgba(0,212,255,0.05)"; }
+      }}
+    >
+      <Icon name="download" size={solid ? 14 : 13} color={solid ? "#040810" : accent} />
+      {label}
+    </a>
+  );
+}
+
+function CVRow({ yrs, inst, role, note, accentColor, href, file }) {
   const inner = (
     <>
       <div className="mono" style={{ fontSize: 11, color: "var(--text-3)", letterSpacing: "0.08em", paddingTop: 3 }}>
@@ -135,6 +178,11 @@ function CVRow({ yrs, inst, role, note, accentColor, href }) {
           {href && <Icon name="external" size={11} color="var(--text-3)" />}
         </div>
         <div style={{ fontSize: 13.5, color: "var(--text-2)", marginTop: 4, lineHeight: 1.55 }}>{note}</div>
+        {file && (
+          <div style={{ marginTop: 13 }}>
+            <DownloadLink {...file} accent={accentColor} />
+          </div>
+        )}
       </div>
     </>
   );

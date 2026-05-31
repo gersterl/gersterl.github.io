@@ -26,6 +26,8 @@ function Icon({ name, size = 20, stroke = 1.6, color = "currentColor", style }) 
       return <svg {...props}><path d="M9 19c-4.3 1.4-4.3-2.5-6-3M15 21v-3.5a3 3 0 0 0-1-2.3c3.1-.3 6-1.5 6-7a5.4 5.4 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8s-1.2-.3-3.9 1.5a13.4 13.4 0 0 0-7 0C4.8.6 3.6.9 3.6.9a5 5 0 0 0-.1 3.8A5.4 5.4 0 0 0 2 8.5c0 5.5 2.9 6.7 6 7a3 3 0 0 0-1 2.3V21"/></svg>;
     case "external":
       return <svg {...props}><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5M15 3h6v6M10 14L20 4"/></svg>;
+    case "download":
+      return <svg {...props}><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>;
     default:
       return null;
   }
